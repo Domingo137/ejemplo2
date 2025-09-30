@@ -40,4 +40,14 @@ if st.button("Verificar respuesta"):
             st.balloons()
             st.session_state.resuelto = True
         else:
-            st.error(f"❌ Inc
+            st.error(f"❌ Incorrecto. Intenta de nuevo.")
+            st.session_state.intentos += 1
+    except ValueError:
+        st.warning("⚠️ Ingresa un número válido.")
+
+# Botón para nueva ecuación (si ya resolvió)
+if st.session_state.resuelto:
+    if st.button("Nueva ecuación"):
+        st.session_state.a, st.session_state.b = generar_ecuacion()
+        st.session_state.resuelto = False
+        st.session_state.respuesta = ""
